@@ -1,0 +1,51 @@
+//Given a Matrix 'a' of dimension nxm & 2 coordinates (l1,r1) & (l2,r2).
+//Return the sum of the Rectangles from (L1,r1) to(l2,r2)
+
+
+#include<iostream>
+#include<vector>
+using namespace std;
+//DRY RUN
+//Matrix= nxm= 3x4
+//[1 2 3 4]      [l0r0 l1r1 l2r2 l3r3]----> cordinates (rows x cols) of the 3x4 matrix
+//[5 6 7 8 ]     [l1r0 l1r1 l1r2 l1r3]
+//[9 10 11 12]   [l2r0 l2r1 l2r2 l2r3]
+
+//output : return the sum of triangle (l1,r1) & (l2 ,r2)= 6+7+10+11 = 34.
+//sum=0
+//at i=1 , j=1--->(l1r1)--> sum =6;
+//at i=1 , j=2--->(l1r1)--> sum =6 + 7 =13;
+//at i=2 , j=1--->(l1r1)--> sum =13+10=23;
+//at i=2 , j=2--->(l1r1)--> sum =23+11= 34 ; get the desired output.
+
+int rectangleSum(vector<vector<int>> &matrix, int l1, int r1, int l2, int r2){
+    int sum=0;
+    for(int i=l1; i<=l2; i++){               //traverse through rows rectangle l1 to l2.
+        for(int j=r1; j<=r2; j++){       //traverse through coloumn rectangle r1 to r2
+        sum+=matrix[i][j];
+        }
+    }
+    return sum;
+}
+int main(){
+int n, m;     //n=rows , m= coloumn
+cin>>n>>m;
+vector<vector<int>>matrix(n,vector<int>(m));    //2D Vector
+for(int i=0; i<n; i++){
+    for(int j=0; j<m; j++){
+        cin>>matrix[i][j];
+    }    
+}
+int l1, l2, r1,r2;
+cin>>l1>>r1>>l2>>r2;
+for(int i=0; i<n; i++){
+    for(int j=0; j<m; j++){
+        cout<<matrix[i][j]<<" ";
+    }
+    cout<<endl;
+}
+int sum=rectangleSum(matrix,l1, r1, l2, r2);
+cout<<sum<<endl;
+
+return 0;
+}
